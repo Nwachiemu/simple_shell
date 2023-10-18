@@ -15,18 +15,19 @@
  */
 list_t *add_node(list_t **head, const char *str, int num)
 {
-    if (!head)
-        return (NULL);
+	if (!head)
+		return (NULL);
 
-    list_t *new_node = malloc(sizeof(list_t));
-    if (!new_node)
-        return (NULL);
+	list_t *new_node = malloc(sizeof(list_t));
 
-    new_node->num = num;
-    new_node->str = (str) ? _strdup(str) : NULL;
-    new_node->next = *head;
-    *head = new_node;
-    return (new_node);
+	if (!new_node)
+		return (NULL);
+
+	new_node->num = num;
+	new_node->str = (str) ? _strdup(str) : NULL;
+	new_node->next = *head;
+	*head = new_node;
+	return (new_node);
 }
 
 /**
@@ -39,28 +40,30 @@ list_t *add_node(list_t **head, const char *str, int num)
  */
 list_t *add_node_end(list_t **head, const char *str, int num)
 {
-    if (!head)
-        return (NULL);
+	if (!head)
+		return (NULL);
 
-    list_t *new_node = malloc(sizeof(list_t));
-    if (!new_node)
-        return (NULL);
+	list_t *new_node = malloc(sizeof(list_t));
 
-    new_node->num = num;
-    new_node->str = (str) ? _strdup(str) : NULL;
-    new_node->next = NULL;
+	if (!new_node)
+		return (NULL);
 
-    if (!*head)
-        *head = new_node;
-    else
-    {
-        list_t *node = *head;
-        while (node->next)
-            node = node->next;
-        node->next = new_node;
-    }
+	new_node->num = num;
+	new_node->str = (str) ? _strdup(str) : NULL;
+	new_node->next = NULL;
 
-    return (new_node);
+	if (!*head)
+		*head = new_node;
+	else
+	{
+		list_t *node = *head;
+
+		while (node->next)
+			node = node->next;
+		node->next = new_node;
+	}
+
+	return (new_node);
 }
 
 /**
@@ -71,17 +74,17 @@ list_t *add_node_end(list_t **head, const char *str, int num)
  */
 size_t print_list_str(const list_t *h)
 {
-    size_t count = 0;
+	size_t count = 0;
 
-    while (h)
-    {
-        _puts((h->str) ? h->str : "(nil)");
-        _puts("\n");
-        h = h->next;
-        count++;
-    }
+	while (h)
+	{
+		_puts((h->str) ? h->str : "(nil)");
+		_puts("\n");
+		h = h->next;
+		count++;
+	}
 
-    return count;
+	return (count);
 }
 
 /**
@@ -92,39 +95,41 @@ size_t print_list_str(const list_t *h)
  * Return: 1 on success, 0 on failure
  */
 int delete_node_at_index(list_t **head, unsigned int index)
+
 {
-    if (!head || !*head)
-        return 0;
+	if (!head || !*head)
 
-    if (index == 0)
-    {
-        list_t *node = *head;
-        *head = (*head)->next;
-        free(node->str);
-        free(node);
-        return 1;
-    }
+		return (0);
 
-    list_t *node = *head;
-    list_t *prev_node = NULL;
-    unsigned int i = 0;
+	if (index == 0)
+	{
+		list_t *node = *head;
+		*head = (*head)->next;
+		free(node->str);
+		free(node);
+		return (1);
+	}
 
-    while (node)
-    {
-        if (i == index)
-        {
-            prev_node->next = node->next;
-            free(node->str);
-            free(node);
-            return 1;
-        }
+	list_t *node = *head;
+	list_t *prev_node = NULL;
+	unsigned int i = 0;
 
-        i++;
-        prev_node = node;
-        node = node->next;
-    }
+	while (node)
+	{
+		if (i == index)
+		{
+			prev_node->next = node->next;
+			free(node->str);
+			free(node);
+			return (1);
+		}
 
-    return 0;
+		i++;
+		prev_node = node;
+		node = node->next;
+	}
+
+	return (0);
 }
 
 /**
@@ -135,7 +140,7 @@ int delete_node_at_index(list_t **head, unsigned int index)
  */
 void free_list(list_t **head_ptr)
 {
-    if (!head_ptr || !*head_ptr)
-        return;
+	if (!head_ptr || !*head_ptr)
+		return;
 
 
