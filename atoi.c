@@ -1,8 +1,3 @@
-/*
- * Simple Shell - atoi.c
- * Authors: Nwachiemu and Ngwuebo
- */
-
 #include "shell.h"
 
 /**
@@ -72,4 +67,3 @@ int _atoi(char *s)
 
 	return (output);
 }
-

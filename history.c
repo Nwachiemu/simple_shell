@@ -1,3 +1,4 @@
+Copy code
 /*
  * Simple Shell - history.c
  * Authors: Nwachiemu and Ngwuebo
@@ -7,8 +8,11 @@
 
 /**
  * get_history_file - gets the history file
- * @info: parameter struct
- * Return: allocated string containg history file
+ * @info: Structure containing potential arguments.
+ * 
+ * This function retrieves the history file, allocating memory for the file path.
+ * 
+ * Return: Returns an allocated string containing the history file on success, or NULL on failure.
  */
 char *get_history_file(info_t *info)
 {
@@ -29,8 +33,12 @@ char *get_history_file(info_t *info)
 
 /**
  * write_history - creates a file, or appends to an existing file
- * @info: the parameter struct
- * Return: 1 on success, else -1
+ * @info: Structure containing potential arguments.
+ * 
+ * This function writes the history list to a file, either creating a new file or
+ * overwriting an existing one.
+ * 
+ * Return: Returns 1 on success, or -1 on failure.
  */
 int write_history(info_t *info)
 {
@@ -57,8 +65,11 @@ int write_history(info_t *info)
 
 /**
  * read_history - reads history from file
- * @info: the parameter struct
- * Return: histcount on success, 0 otherwise
+ * @info: Structure containing potential arguments.
+ * 
+ * This function reads the history from a file, populating the history list.
+ * 
+ * Return: Returns the histcount (number of history entries) on success, or 0 on failure.
  */
 int read_history(info_t *info)
 {
@@ -105,10 +116,13 @@ int read_history(info_t *info)
 
 /**
  * build_history_list - adds entry to a history linked list
- * @info: Structure containing potential arguments. Used to maintain
- * @buf: buffer
- * @linecount: the history linecount, histcount
- * Return: Always 0
+ * @info: Structure containing potential arguments.
+ * @buf: Buffer.
+ * @linecount: The history line count, histcount.
+ * 
+ * This function adds an entry to the history linked list.
+ * 
+ * Return: Always returns 0.
  */
 int build_history_list(info_t *info, char *buf, int linecount)
 {
@@ -125,8 +139,11 @@ int build_history_list(info_t *info, char *buf, int linecount)
 
 /**
  * renumber_history - renumbers the history linked list after changes
- * @info: Structure containing potential arguments. Used to maintain
- * Return: the new histcount
+ * @info: Structure containing potential arguments.
+ * 
+ * This function renumbers the history linked list after changes have been made.
+ * 
+ * Return: Returns the new histcount (number of history entries).
  */
 int renumber_history(info_t *info)
 {
@@ -140,4 +157,3 @@ int renumber_history(info_t *info)
 	}
 	return (info->histcount = i);
 }
-
