@@ -93,18 +93,16 @@ typedef struct passinfo
 	int histcount;
 } info_t;
 
-#define INFO_INIT
-
-	NULL, NULL, NULL, 0, 0, 0, 0, NULL,
-	NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0
-
+#define INFO_INIT                                                               \
+{                                                                           \
+	NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+	0, 0, 0                                                             \
+}
 
 /**
  * struct builtin - representing a built-in command in a shell.
- * @type: A pointer to a string identifying
- * the type or name of the built-in command.
- * @func: A function pointer to
- * the implementation of the built-in command.
+ * @type: A pointer to a string identifying the type or name of the built-in command.
+ * @func: A function pointer to the implementation of the built-in command.
  */
 typedef struct builtin
 {
@@ -114,7 +112,7 @@ typedef struct builtin
 
 /* Function Prototypes */
 /* Prototypes for functions in toem_shloop.c */
-int hsh(info_t, char *);
+int hsh(info_t , char *);
 int find_builtin(info_t *);
 void find_cmd(info_t *);
 void fork_cmd(info_t *);
