@@ -6,11 +6,11 @@
 #include "shell.h"
 
 /**
- * _myenv - prints the current environment.
+ *_myenv - prints the current environment.
  * @info: Structure containing potential arguments.
- * 
+ *
  * This function prints the current environment to the standard output.
- * 
+ *
  * Return: Always returns 0.
  */
 int _myenv(info_t *info)
@@ -20,13 +20,13 @@ int _myenv(info_t *info)
 }
 
 /**
- * _getenv - gets the value of an environment variable.
+ *_getenv - gets the value of an environment variable.
  * @info: Structure containing potential arguments.
  * @name: Environment variable name.
- * 
- * This function retrieves the value of the specified environment variable.
- * 
- * Return: Returns the value of the environment variable if found; otherwise, NULL.
+ *
+ * This function retrieves value of the specified environment variable.
+ *
+ * Return: Returns value of environment variable if found; otherwise, NULL.
  */
 char *_getenv(info_t *info, const char *name)
 {
@@ -44,12 +44,14 @@ char *_getenv(info_t *info, const char *name)
 }
 
 /**
- * _mysetenv - Initializes a new environment variable or modifies an existing one.
+ * _mysetenv - Initializes a new environment
+ * variable or modifies an existing one.
  * @info: Structure containing potential arguments.
- * 
- * This function initializes a new environment variable or modifies an existing one
+ *
+ * This function initializes new environment
+ * variable or modifies an existing one
  * based on the provided arguments.
- * 
+ *
  * Return: Returns 0 on success or 1 on error.
  */
 int _mysetenv(info_t *info)
@@ -67,9 +69,9 @@ int _mysetenv(info_t *info)
 /**
  * _myunsetenv - Removes an environment variable.
  * @info: Structure containing potential arguments.
- * 
+ *
  * This function removes one or more environment variables.
- * 
+ *
  * Return: Returns 0 on success or 1 on error.
  */
 int _myunsetenv(info_t *info)
@@ -90,9 +92,10 @@ int _myunsetenv(info_t *info)
 /**
  * populate_env_list - Populates the environment linked list.
  * @info: Structure containing potential arguments.
- * 
- * This function populates the environment linked list using the values from the 'environ' array.
- * 
+ *
+ * This function populates environment linked
+ * list using values from the 'environ' array.
+ *
  * Return: Always returns 0.
  */
 int populate_env_list(info_t *info)
