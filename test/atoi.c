@@ -65,4 +65,5 @@ int _atoi(char *s)
 
 	output = (sign == -1) ? -result : result;
 
-	retur
+	return(output);
+}
