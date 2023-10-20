@@ -4,6 +4,10 @@
  */
 
 #include "shell.h"
+#include "list.h"
+
+/**
+ * Include the header file that contains the function declarations
 
 /**
  * _myhistory - displays the history list, one command by line, preceded
@@ -118,3 +122,4 @@ int _myalias(info_t *info)
 
 	return (0);
 }
+
