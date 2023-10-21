@@ -78,7 +78,7 @@ int handle_built_in(in_formations *info)
 	builtin_commands built_ints[] = {
 		/*{"cd", handle_cd},*/
 		{"env", _printenv},
-		/*{"exit", handle_exit},*/
+		{"exit", handle_exit},
 		/*{"help", handle_help},*/
 		/*{"alias", handle_alias},*/
 		/*{"setenv", check_setenv},*/

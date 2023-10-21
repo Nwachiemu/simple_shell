@@ -122,7 +122,7 @@ int put_char(char);
 int _isalpha(int);
 int _atoi(char *);
 int err_num(char *);
-int handle_exit(in_formations *);
+int handle_exit(in_formations *info);
 int handle_cd(in_formations *);
 int handle_help(in_formations *);
 int handle_history(in_formations *);
