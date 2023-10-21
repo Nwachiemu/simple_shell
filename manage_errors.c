@@ -123,7 +123,7 @@ char *change_base(long int num, int base, int flags)
  * Return: 0;
  */
 
-/**void handle_comments(char *buf)
+void handle_comments(char *buf)
 {
 	int i;
 
@@ -133,4 +133,4 @@ char *change_base(long int num, int base, int flags)
 			buf[i] = '\0';
 			break;
 		}
-}*/
+}
