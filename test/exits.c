@@ -1,74 +1,73 @@
-/*
- * Simple Shell - exits.c
- * Authors: Nwachiemu and Ngwuebo
- */
-
 #include "shell.h"
 
 /**
- * _strncpy - copies a string
- * @dest: the destination string to be copied to
- * @src: the source string
- * @n: the amount of characters to be copied
- * Return: the concatenated string
+ * _strncpy - Copy a string with a limit
+ * @dest: Destination buffer
+ * @src: Source string
+ * @n: Maximum number of characters to copy
+ *
+ * Return: Pointer to the destination buffer
  */
 char *_strncpy(char *dest, char *src, int n)
 {
-	int i = 0, j;
+	int i;
 	char *s = dest;
 
-	while (src[i] != '\0' && i < n - 1)
-	{
+	for (i = 0; src[i] && i < n; i++)
 		dest[i] = src[i];
+
+	while (i < n)
+	{
+		dest[i] = '\0';
 		i++;
 	}
-	if (i < n)
-	{
-		for (j = i; j < n; j++)
-		{
-			dest[j] = '\0';
-		}
-	}
+
 	return (s);
 }
 
 /**
- * _strncat - concatenates two strings
- * @dest: the first string
- * @src: the second string
- * @n: the amount of bytes to be maximally used
- * Return: the concatenated string
+ * _strncat - Concatenate two strings with a limit
+ * @dest: Destination string
+ * @src: Source string
+ * @n: Maximum number of characters to append from src
+ *
+ * Return: Pointer to the destination string
  */
 char *_strncat(char *dest, char *src, int n)
 {
-	int i = 0, j = 0;
+	int i, j;
 	char *s = dest;
 
-	while (dest[i] != '\0')
-		i++;
-	while (src[j] != '\0' && j < n)
+	for (i = 0; dest[i]; i++)
+		;
+
+	for (j = 0; src[j] && j < n; j++)
+		;
+
 	{
 		dest[i] = src[j];
 		i++;
-		j++;
 	}
-	if (j < n)
-		dest[i] = '\0';
+
+	dest[i] = '\0';
+
 	return (s);
 }
 
 /**
- * _strchr - locates a character in a string
- * @s: the string to be parsed
- * @c: the character to look for
- * Return: (s) a pointer to the memory area s
+ * _strchr - Locate a character in a string
+ * @s: The string to search
+ * @c: The character to find
+ *
+ * Return: Pointer to the first
+ * occurrence of the character in the string, or NULL
  */
 char *_strchr(char *s, char c)
 {
 	do {
 		if (*s == c)
 			return (s);
-	} while (*s++ != '\0');
+	} while (*s++);
 
 	return (NULL);
 }

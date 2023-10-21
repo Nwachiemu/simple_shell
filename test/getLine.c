@@ -1,158 +1,88 @@
-/*
- * Simple Shell - getLine.c
- * Authors: Nwachiemu and Ngwuebo
- */
-
-#include "shell.h"
-
 /**
- * input_buf - buffers chained commands
- * @info: parameter struct
- * @buf: address of buffer
- * @len: address of len var
- * Return: bytes read
+ * input_buf - Buffers chained commands.
+ * @info: Parameter struct.
+ * @buf: Address of buffer.
+ * @len: Address of len var.
+ *
+ * Return: Bytes read.
  */
 ssize_t input_buf(info_t *info, char **buf, size_t *len)
 {
 	ssize_t r = 0;
 	size_t len_p = 0;
 
-	if (!*len) /* if nothing left in the buffer, fill it */
-	{
+	if (!*len)
+
 		free(*buf);
-		*buf = NULL;
-		signal(SIGINT, sigintHandler);
-		r = getline(buf, &len_p, stdin);
-		if (r > 0)
+	*buf = NULL;
+	signal(SIGINT, sigintHandler);
+	r = getline(buf, &len_p, stdin);
+	if (r > 0)
+
+		if ((*buf)[r - 1] == '\n')
 		{
-			if ((*buf)[r - 1] == '\n')
-			{
-				(*buf)[r - 1] = '\0'; /* remove trailing newline */
-				r--;
-			}
-			info->linecount_flag = 1;
-			remove_comments(*buf);
-			build_history_list(info, *buf, info->histcount++);
-			*len = r;
-			info->cmd_buf = buf;
+			(*buf)[r - 1] = '\0';
+			r--;
 		}
-	}
-	return (r);
+	info->linecount_flag = 1;
+	remove_comments(*buf);
+	build_history_list(info, *buf, info->histcount++);
+	*len = r;
+	info->cmd_buf = buf;
 }
 
-/**
- * get_input - gets a line minus the newline
- * @info: parameter struct
- * Return: bytes read
- */
-ssize_t get_input(info_t *info)
-{
-	static char *buf;
-	static size_t i, j, len;
-	ssize_t r = 0;
-	char **buf_p = &(info->arg);
-
-	_putchar(BUF_FLUSH);
-	r = input_buf(info, &buf, &len);
-	if (r == -1)
-		return (-1);
-	if (len)
-	{
-		j = i;
-		char *p = buf + i;
-
-		check_chain(info, buf, &j, i, len);
-		while (j < len)
-		{
-			if (is_chain(info, buf, &j))
-				break;
-			j++;
-		}
-
-		i = j + 1;
-		if (i >= len)
-		{
-			i = len = 0;
-			info->cmd_buf_type = CMD_NORM;
-		}
-
-		*buf_p = p;
-		return (_strlen(p));
-	}
-
-	*buf_p = buf;
-	return (r);
-}
+return (r);
 
 /**
- * read_buf - reads a buffer
- * @info: parameter struct
- * @buf: buffer
- * @i: size
- * Return: r
+ * _getline - Gets the next line of input from STDIN.
+ * @info: Parameter struct.
+ * @ptr: Address of pointer to buffer, preallocated or NULL.
+ * @length: Size of preallocated ptr buffer if not NULL.
+ *
+ * Return: Bytes read.
  */
-ssize_t read_buf(info_t *info, char *buf, size_t *i)
+int _getline(info_t *info, char **ptr, size_t *length);
+char buf[READ_BUF_SIZE];
+size_t i = 0, len = 0;
+size_t k;
+ssize_t r = 0, s = 0;
+char *p = *ptr;
+char *new_p = NULL;
+char *c;
+
+if (p && length)
 {
-	ssize_t r = 0;
-
-	if (*i)
-		return (0);
-	r = read(info->readfd, buf, READ_BUF_SIZE);
-	if (r >= 0)
-		*i = r;
-	return (r);
-}
-
-/**
- * _getline - gets the next line of input from STDIN
- * @info: parameter struct
- * @ptr: address of pointer to buffer, preallocated or NULL
- * @length: size of preallocated ptr buffer if not NULL
- * Return: s
- */
-int _getline(info_t *info, char **ptr, size_t *length)
-{
-	static char buf[READ_BUF_SIZE];
-	static size_t i, len;
-	size_t k;
-	ssize_t r = 0, s = 0;
-	char *p = NULL, *new_p = NULL, *c;
-
-	p = *ptr;
-	if (p && length)
-		s = *length;
+	s = *length;
 	if (i == len)
+	{
 		i = len = 0;
+		r = read_buf(info, buf, &len);
+	}
+	if (r == -1 || (r == 0 && len == 0);
+			return (-1);
 
-	r = read_buf(info, buf, &len);
-	if (r == -1 || (r == 0 && len == 0))
-		return (-1);
 
-	c = _strchr(buf + i, '\n');
-	k = c ? 1 + (unsigned int)(c - buf) : len;
-	new_p = _realloc(p, s, s ? s + k : k + 1);
-	if (!new_p)
-		return (p ? free(p), -1 : -1);
+			c = _strchr(buf + i, '\n');
+			k = c ? 1 + (unsigned int)(c - buf) : len;
+			new_p = _realloc(p, s, s ? s + k : k + 1);
+			if (!new_p)
+			return (p ? free(p), -1 : -1);
 
-	if (s)
-		_strncat(new_p, buf + i, k - i);
-	else
-		_strncpy(new_p, buf + i, k - i + 1);
 
-	s += k - i;
-	i = k;
-	p = new_p;
+			if (s)
+			_strncat(new_p, buf + i, k - i);
+			else
+			{
+			_strncpy(new_p, buf + i, k - i + 1);
+			}
 
-	if (length)
-		*length = s;
-	*ptr = p;
-	return (s);
+			s += k - i;
+			i = k;
+			p = new_p;
+
+			if (length)
+				*length = s;
+			*ptr = p;
+			return (s);
 }
-
-/**
- * sigintHandler - blocks ctrl-C
- * @sig_num: the signal number
- * Return: void
- */
-void sigint```
 

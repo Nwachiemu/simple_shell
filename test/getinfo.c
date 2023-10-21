@@ -1,13 +1,8 @@
-/*
- * Simple Shell - getinfo.c
- * Authors: Nwachiemu and Ngwuebo
- */
-
 #include "shell.h"
 
 /**
- * clear_info - initializes info_t struct
- * @info: struct address
+ * clear_info - Initializes info_t struct fields.
+ * @info: Struct address.
  */
 void clear_info(info_t *info)
 {
@@ -18,9 +13,9 @@ void clear_info(info_t *info)
 }
 
 /**
- * set_info - initializes info_t struct
- * @info: struct address
- * @av: argument vector
+ * set_info - Initializes info_t struct fields.
+ * @info: Struct address.
+ * @av: Argument vector.
  */
 void set_info(info_t *info, char **av)
 {
@@ -49,9 +44,9 @@ void set_info(info_t *info, char **av)
 }
 
 /**
- * free_info - frees info_t struct fields
- * @info: struct address
- * @all: true if freeing all fields
+ * free_info - Frees info_t struct fields.
+ * @info: Struct address.
+ * @all: True if freeing all fields.
  */
 void free_info(info_t *info, int all)
 {
@@ -62,12 +57,9 @@ void free_info(info_t *info, int all)
 	{
 		if (!info->cmd_buf)
 			free(info->arg);
-		if (info->env)
-			free_list(&(info->env));
-		if (info->history)
-			free_list(&(info->history));
-		if (info->alias)
-			free_list(&(info->alias));
+		free_list(&(info->env), 1);
+		free_list(&(info->history), 1);
+		free_list(&(info->alias), 1);
 		ffree(info->environ);
 		info->environ = NULL;
 		bfree((void **)info->cmd_buf);
