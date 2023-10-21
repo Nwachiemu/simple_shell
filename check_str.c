@@ -11,19 +11,19 @@ bool is_chain(in_formations *info, char *buf, size_t *p)
 {
 	size_t j = *p;
 
-	if (buf[j] == '|' && buf[j + 1] == '*')
+	if (buf[j] == '|' && buf[j + 1] == '|')
 	{
 		buf[j] = 0;
 		j++;
 		info->sep_buff_kind = 1;
 	}
-	else if (buf[j] == '&' && buf[j + 1] == '*')
+	else if (buf[j] == '&' && buf[j + 1] == '&')
 	{
 		buf[j] = 0;
 		j++;
 		info->sep_buff_kind = AND_F;
 	}
-	else if (buf[j] == '*')
+	else if (buf[j] == ';')
 	{
 		buf[j] = 0;
 		info->sep_buff_kind = CHAIN_F;
