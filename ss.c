@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		fid = open(argv[0], O_RDONLY);/* O_RDONLY*/
+		fid = open(argv[1], O_RDONLY);/* O_RDONLY*/
 		if (fid == -1)
 		{
 			if (errno == EACCES)
